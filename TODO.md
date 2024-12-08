@@ -1,0 +1,5 @@
+- refactor the code for getting the embedding of an image, encapsulate all code in the FaceNetModel class
+- add a similarity method to calculate if the embeddings are for the same person or not
+- add code to loop over all the persons in the images folder
+- detect the name of the person by its image
+- integrate it with the face detection, make this process automated
