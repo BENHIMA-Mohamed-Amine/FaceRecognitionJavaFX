@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.shape.Rectangle?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.facenetfx.UserController.DashboardController">
+    <VBox spacing="10">
+        <fx:include source="../Utils/nav-bar.fxml" />
+        <VBox fx:id="dashboardRoot">
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+            <Label text="dashboard" />
+        </VBox>
+    </VBox>
+</AnchorPane>

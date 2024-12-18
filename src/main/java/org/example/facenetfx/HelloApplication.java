@@ -1,8 +1,11 @@
 package org.example.facenetfx;
 
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +29,8 @@ import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+
 import javafx.scene.control.Label;
 
 public class HelloApplication extends Application {
@@ -158,75 +163,77 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        capture = new VideoCapture(0); // Open the default camera (0)
-        if (!capture.isOpened()) {
-            System.err.println("Error: Unable to open video capture!");
-            return;
-        }
-        faceNetModel.loadModel();
-        loadClassifier(); // Load the face detection classifier
-
-        ImageView imageView = new ImageView();
-        imageView.setPreserveRatio(true); // Preserve aspect ratio during resizing
-        HBox hbox = new HBox(imageView);
-        Scene scene = new Scene(hbox, 800, 600); // Set initial window size
-        stage.setScene(scene);
-        stage.setTitle("Webcam Stream with Face Detection");
-        stage.setResizable(true); // Allow window resizing
-        stage.setOnCloseRequest(event -> capture.release()); // Release camera on close
+//        capture = new VideoCapture(0); // Open the default camera (0)
+//        if (!capture.isOpened()) {
+//            System.err.println("Error: Unable to open video capture!");
+//            return;
+//        }
+//        faceNetModel.loadModel();
+//        loadClassifier(); // Load the face detection classifier
+//
+//        ImageView imageView = new ImageView();
+//        imageView.setPreserveRatio(true); // Preserve aspect ratio during resizing
+//        HBox hbox = new HBox(imageView);
+//        Scene scene = new Scene(hbox, 800, 600); // Set initial window size
+//        stage.setScene(scene);
+//        stage.setTitle("Webcam Stream with Face Detection");
+//        stage.setResizable(true); // Allow window resizing
+//        stage.setOnCloseRequest(event -> capture.release()); // Release camera on close
+//        stage.show();
+//
+//        // Resize ImageView with the window
+//        imageView.fitWidthProperty().bind(hbox.widthProperty());
+//        imageView.fitHeightProperty().bind(hbox.heightProperty());
+//
+//        File folder = new File("./images");
+//        if (!(folder.exists() && folder.isDirectory())){
+//            System.out.println("DBFaces not a folder or don't exist");
+//            System.exit(0);
+//            Platform.exit();
+//        }
+//        File[] files = folder.listFiles();
+//        if(files != null){
+//            for(File file: files){
+//                if(file.isFile()){
+//                    detectFaceAndSave("./images/"+file.getName());
+//                }
+//            }
+//        }
+//
+//        final boolean[] isSamePerson = {false};
+//
+//
+//        // AnimationTimer for continuous frame capture with face detection
+//        if(!isSamePerson[0]){
+//            new AnimationTimer() {
+//                @Override
+//                public void handle(long now) {
+//                    Image detectedImage = null;
+//                    try {
+//                        PersonFrame personFrame = getCaptureWithFaceDetectionAndSave();
+//                        detectedImage = personFrame.getImg();
+//                        isSamePerson[0] = personFrame.isSamePerson();
+//                    } catch (Exception e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    if (detectedImage != null) {
+//                        imageView.setImage(detectedImage);
+//                    }
+//                    if(isSamePerson[0]){
+//                        this.stop();
+//                    }
+//                }
+//            }.start();
+//        }
+//
+//        Label authenticatedLabel = new Label("You are authenticated");
+//        VBox authenticatedBox = new VBox(authenticatedLabel);
+//        scene.setRoot(authenticatedBox);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("UserViews/dashboard.fxml")));
+        stage.setTitle("Face Recognition");
+        stage.setScene(new Scene(root, 600, 500));
         stage.show();
-
-        // Resize ImageView with the window
-        imageView.fitWidthProperty().bind(hbox.widthProperty());
-        imageView.fitHeightProperty().bind(hbox.heightProperty());
-
-        File folder = new File("./images");
-        if (!(folder.exists() && folder.isDirectory())){
-            System.out.println("DBFaces not a folder or don't exist");
-            System.exit(0);
-            Platform.exit();
-        }
-        File[] files = folder.listFiles();
-        if(files != null){
-            for(File file: files){
-                if(file.isFile()){
-                    detectFaceAndSave("./images/"+file.getName());
-                }
-            }
-        }
-
-        final boolean[] isSamePerson = {false};
-
-
-        // AnimationTimer for continuous frame capture with face detection
-        if(!isSamePerson[0]){
-            new AnimationTimer() {
-                @Override
-                public void handle(long now) {
-                    Image detectedImage = null;
-                    try {
-                        PersonFrame personFrame = getCaptureWithFaceDetectionAndSave();
-                        detectedImage = personFrame.getImg();
-                        isSamePerson[0] = personFrame.isSamePerson();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                    if (detectedImage != null) {
-                        imageView.setImage(detectedImage);
-                    }
-                    if(isSamePerson[0]){
-                        this.stop();
-                    }
-                }
-            }.start();
-        }
-
-        Label authenticatedLabel = new Label("You are authenticated");
-        VBox authenticatedBox = new VBox(authenticatedLabel);
-        scene.setRoot(authenticatedBox);
-
     }
-
     public static void main(String[] args) throws Exception {
         launch();
     }

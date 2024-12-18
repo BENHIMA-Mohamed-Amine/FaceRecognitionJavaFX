@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox minWidth="600" alignment="CENTER" style="-fx-background-color: #333; -fx-padding: 10px;" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.facenetfx.Utils.NavBarController">
+    <HBox  spacing="20" alignment="CENTER">
+        <!-- Navbar Links -->
+        <Button fx:id="dashboardLink"
+                text="Dashboard"
+                style="-fx-background-color: transparent;
+               -fx-text-fill: white;
+               -fx-font-size: 14px;
+               -fx-cursor: hand;"
+                onMouseEntered="#handleHover"
+                onMouseExited="#handleExit"
+                onAction="#handleGoToDashboard"
+        />
+
+        <Button fx:id="usersLink"
+                text="Users"
+                style="-fx-background-color: transparent;
+               -fx-text-fill: white;
+               -fx-font-size: 14px;
+               -fx-cursor: hand;"
+                onMouseEntered="#handleHover"
+                onMouseExited="#handleExit"
+                onAction="#handleGoToUsers"
+        />
+
+        <Button text="Logs"
+                style="-fx-background-color: transparent;
+               -fx-text-fill: white;
+               -fx-font-size: 14px;
+               -fx-cursor: hand;"
+                onMouseEntered="#handleHover"
+                onMouseExited="#handleExit"
+                onAction="#handleGoToLogs"
+        />
+
+        <Button text="Profile"
+                style="-fx-background-color: transparent;
+               -fx-text-fill: white;
+               -fx-font-size: 14px;
+               -fx-cursor: hand;"
+                onMouseEntered="#handleHover"
+                onMouseExited="#handleExit"
+                onAction="#handleGoToProfile"
+        />
+    </HBox>
+</VBox>
